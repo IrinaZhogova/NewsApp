@@ -8,10 +8,11 @@
 
 import Foundation
 import Alamofire
+import DocumentClassifier
 
 class NewsHelper {
     
-    func getArticles() {
+    func getArticles(returnArticles: @escaping ([Article]) -> Void) {
         Alamofire.request("https://newsapi.org/v2/top-headlines?country=us&apiKey=6c03bce6808f469facec40c9a3a27674").responseJSON { (response) in
             print(response)
             
@@ -31,8 +32,11 @@ class NewsHelper {
                         article.urlToImage = urlToImage
                         article.url = url
                         article.description = description
+                        guard let classification = DocumentClassifier().classify(description) else { return }
+                        article.category = classification.prediction.category.rawValue
                         articles.append(article)
                     }
+                    returnArticles(articles)
                 }
             }
         }

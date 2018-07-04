@@ -7,33 +7,69 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ArticleTableViewController: UITableViewController {
+    
+    var articles = [Article]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NewsHelper().getArticles()
+        NewsHelper().getArticles { (articles) in
+            self.articles = articles
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 0
+        return articles.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? ArticleCell {
+            
+            let article = articles[indexPath.row]
+            
+            cell.titleLabel.text = article.title
+            cell.categoryLabel.text = article.category
+            
+            let url = URL(string: article.urlToImage)
+            cell.articleImage.kf.setImage(with: url)
+            
+           return cell
+        }
 
-        // Configure the cell...
 
-        return cell
+        return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 260
     }
 
 }
+
+class ArticleCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var articleImage: UIImageView!
+    @IBOutlet weak var categoryLabel: UILabel!
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
