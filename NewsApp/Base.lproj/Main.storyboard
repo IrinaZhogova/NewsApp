@@ -38,7 +38,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon" translatesAutoresizingMaskIntoConstraints="NO" id="KJj-bR-bSL">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text-lines" translatesAutoresizingMaskIntoConstraints="NO" id="KJj-bR-bSL">
                                             <rect key="frame" x="5" y="61" width="365" height="173"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KGLAKKFGVKOPKGPRLGP[AFDBP[KVKGFDP[KG[PKP[DLG[DFPLGVfjisficeowfpq34r" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="36U-iN-gE3">
@@ -79,7 +79,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="News" id="5vQ-bD-aDd">
                         <barButtonItem key="backBarButtonItem" title="Articles" id="Iaa-8w-NzP"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="5sw-oz-Qcc"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="5sw-oz-Qcc">
+                            <connections>
+                                <action selector="reloadTapped:" destination="pq8-L8-xfe" id="xxT-OJ-lQ4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="Qr9-8R-ayv" kind="show" identifier="goToURL" id="6OJ-gR-umV"/>
@@ -115,6 +119,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cZi-cd-C6e"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="g08-wz-2PU" id="S73-2W-BcH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAb-0u-e0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -138,6 +145,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="moon" width="8192" height="4096"/>
+        <image name="text-lines" width="512" height="512"/>
     </resources>
 </document>
